@@ -1,0 +1,172 @@
+[gd_scene load_steps=23 format=3 uid="uid://dadb1d17g167b"]
+
+[ext_resource type="Script" uid="uid://5mf8xpohsvgb" path="res://scripts/objects/level.gd" id="1_ugcn1"]
+[ext_resource type="PackedScene" uid="uid://dpbcprk36qxtr" path="res://scenes/player/player.tscn" id="2_pimnq"]
+[ext_resource type="PackedScene" uid="uid://dqkmv0qmomhrp" path="res://scenes/objects/enemy_spawner.tscn" id="3_2bnyt"]
+[ext_resource type="PackedScene" uid="uid://ekng27jtktln" path="res://scenes/enemies/rammy.tscn" id="4_fkk1g"]
+[ext_resource type="PackedScene" uid="uid://bve3w46wuf2q4" path="res://scenes/objects/next_level_door.tscn" id="5_qi5uv"]
+[ext_resource type="PackedScene" uid="uid://cxgwkutsc6t7y" path="res://scenes/essence/essence_collectable.tscn" id="6_f6egh"]
+[ext_resource type="PackedScene" uid="uid://cvljvkb6w42xi" path="res://scenes/levels/level_4.tscn" id="6_n6eey"]
+[ext_resource type="Texture2D" uid="uid://dddf1qiadbifv" path="res://assets/art/essences/rammy_essence.png" id="7_ugcn1"]
+[ext_resource type="Script" uid="uid://cictqv5y23sg1" path="res://assets/essences/rammy_essence.gd" id="8_pimnq"]
+[ext_resource type="Script" uid="uid://dn8b27p7l4qd4" path="res://scripts/objects/tutorial_text.gd" id="9_2bnyt"]
+[ext_resource type="FontFile" uid="uid://dsgd2l7v3xakg" path="res://assets/fonts/Beautiful Valentine.otf" id="10_n6eey"]
+
+[sub_resource type="Gradient" id="Gradient_n6eey"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.57377, 1)
+colors = PackedColorArray(0.541176, 0.345098, 0.396078, 1, 0.337255, 0.329412, 0.431373, 1, 0.270588, 0.168627, 0.247059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qi5uv"]
+gradient = SubResource("Gradient_n6eey")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk5k4"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc4kc"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8va5"]
+size = Vector2(340, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dga24"]
+size = Vector2(340, 10)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6761a"]
+vertices = PackedVector2Array(404.117, -59.3203, 407.859, 230.039, -76.2891, 231.961, -85.6719, -75.6484)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-96, -86, 414, -69, 418, 240, -86, 242)])
+
+[sub_resource type="Resource" id="Resource_f6egh"]
+resource_local_to_scene = true
+script = ExtResource("8_pimnq")
+invincibility_time = 3.0
+icon = ExtResource("7_ugcn1")
+max_health = 100
+decrement = 10
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_t4txi"]
+resource_local_to_scene = true
+script = ExtResource("8_pimnq")
+invincibility_time = 3.0
+icon = ExtResource("7_ugcn1")
+max_health = 100
+decrement = 10
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_apo5x"]
+resource_local_to_scene = true
+script = ExtResource("8_pimnq")
+invincibility_time = 3.0
+icon = ExtResource("7_ugcn1")
+max_health = 100
+decrement = 10
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4txi"]
+font = ExtResource("10_n6eey")
+font_size = 8
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_ugcn1")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.658824)
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 330.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qi5uv")
+
+[node name="Player" parent="." instance=ExtResource("2_pimnq")]
+position = Vector2(160, 46)
+
+[node name="ScreenBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(-5, 90)
+shape = SubResource("RectangleShape2D_sk5k4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(325, 90)
+shape = SubResource("RectangleShape2D_oc4kc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, -5)
+shape = SubResource("RectangleShape2D_s8va5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, 185)
+shape = SubResource("RectangleShape2D_dga24")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_2bnyt")]
+enemy_to_spawn = ExtResource("4_fkk1g")
+spawn_time = 2
+total_enemies_to_spawn = 2
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_2bnyt")]
+enemy_to_spawn = ExtResource("4_fkk1g")
+spawn_time = 4
+total_enemies_to_spawn = 3
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("5_qi5uv")]
+visible = false
+position = Vector2(156, 91)
+next_level = ExtResource("6_n6eey")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_6761a")
+
+[node name="EssenceCollectable" parent="." instance=ExtResource("6_f6egh")]
+position = Vector2(110, 94)
+essence = SubResource("Resource_f6egh")
+
+[node name="EssenceCollectable2" parent="." instance=ExtResource("6_f6egh")]
+position = Vector2(210, 94)
+essence = SubResource("Resource_t4txi")
+
+[node name="EssenceCollectable3" parent="." instance=ExtResource("6_f6egh")]
+position = Vector2(160, 94)
+essence = SubResource("Resource_apo5x")
+
+[node name="TutorialText" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_2bnyt")
+
+[node name="Label" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_top = 49.0
+offset_right = 320.0
+offset_bottom = 63.0
+text = "These essences can only be used once before depleting"
+label_settings = SubResource("LabelSettings_t4txi")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_top = 119.0
+offset_right = 320.0
+offset_bottom = 133.0
+text = "Grants temporary invincibility
+ being able to damage enemies while invincible"
+label_settings = SubResource("LabelSettings_t4txi")
+horizontal_alignment = 1

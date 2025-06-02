@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://buhjhbbqrllug"]
+
+[ext_resource type="AudioStream" uid="uid://duu0h701usjig" path="res://assets/music/theme.wav" id="1_2e5cq"]
+[ext_resource type="Script" uid="uid://b4g5tj6364ts8" path="res://scenes/objects/theme.gd" id="2_j8rtk"]
+
+[node name="Theme" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_2e5cq")
+volume_db = -5.0
+autoplay = true
+script = ExtResource("2_j8rtk")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

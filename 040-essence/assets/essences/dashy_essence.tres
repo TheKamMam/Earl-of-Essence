@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://btnu4ickg0rnf"]
+
+[ext_resource type="Texture2D" uid="uid://dr8655gwwswgi" path="res://assets/art/essences/dashy_essence.png" id="1_a4o2u"]
+[ext_resource type="Script" uid="uid://bnly8d4gj72r7" path="res://assets/essences/dashy_essence.gd" id="2_2pit1"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_2pit1")
+dash_speed = 600
+dash_time = 0.125
+dash_cooldown = 0.5
+icon = ExtResource("1_a4o2u")
+max_health = 100
+decrement = 20
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"

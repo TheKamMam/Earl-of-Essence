@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://702cci7srtdu"]
+
+[ext_resource type="Texture2D" uid="uid://l33rx71okcaa" path="res://assets/art/essences/spitty_essence.png" id="1_cy5va"]
+[ext_resource type="Script" uid="uid://f3lxvfmvijie" path="res://assets/essences/spitty_essence.gd" id="2_o7hp5"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_o7hp5")
+icon = ExtResource("1_cy5va")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxgwkutsc6t7y"]
+
+[ext_resource type="Script" uid="uid://b7ircqa2qd7x2" path="res://scripts/essence/essence_ui.gd" id="1_fd7nx"]
+[ext_resource type="Texture2D" uid="uid://dr8655gwwswgi" path="res://assets/art/essences/dashy_essence.png" id="2_bc200"]
+[ext_resource type="PackedScene" uid="uid://diric85xn7pgu" path="res://scenes/components/collectable_component.tscn" id="3_bc200"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68fe0"]
+radius = 26.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jo28h"]
+radius = 2.0
+
+[node name="EssenceCollectable" type="Node2D"]
+script = ExtResource("1_fd7nx")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 248.0
+offset_bottom = 246.0
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("2_bc200")
+
+[node name="CollectableComponent" parent="." node_paths=PackedStringArray("host", "collection_range", "claim_range") instance=ExtResource("3_bc200")]
+host = NodePath("..")
+collection_range = NodePath("CollectionArea")
+claim_range = NodePath("ClaimArea")
+
+[node name="CollectionArea" type="Area2D" parent="CollectableComponent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent/CollectionArea"]
+shape = SubResource("CircleShape2D_68fe0")
+
+[node name="ClaimArea" type="Area2D" parent="CollectableComponent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent/ClaimArea"]
+shape = SubResource("CircleShape2D_jo28h")
+debug_color = Color(0.596094, 0.7, 0, 0.42)

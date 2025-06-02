@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://dre7ka4sm0oy1"]
+
+[ext_resource type="FontFile" uid="uid://dsgd2l7v3xakg" path="res://assets/fonts/Beautiful Valentine.otf" id="1_org1n"]
+[ext_resource type="Script" uid="uid://cwbmol06s04ux" path="res://scripts/objects/game_over.gd" id="1_qy7gw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j7ifq"]
+font = ExtResource("1_org1n")
+font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_org1n"]
+bg_color = Color(0.50851, 0.519531, 0.142059, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy7gw"]
+bg_color = Color(0.317341, 0.324219, 0.0886536, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpwf7"]
+bg_color = Color(0.725427, 0.742188, 0.205841, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qy7gw")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.244773, 0.224258, 0.269531, 1)
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 44.0
+offset_right = 237.0
+offset_bottom = 69.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_j7ifq")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 100.0
+offset_right = 204.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource("1_org1n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_org1n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_org1n")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qy7gw")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpwf7")
+text = "Try Again?"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

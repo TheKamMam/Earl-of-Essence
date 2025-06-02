@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0cl120t1o255"]
+
+[ext_resource type="Script" uid="uid://couija0l753g5" path="res://scripts/objects/dash_particles.gd" id="1_nqmue"]
+
+[sub_resource type="Curve" id="Curve_m34si"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, -7.50695, 0, 0, Vector2(1, 0), 0.239137, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_4ry81"]
+offsets = PackedFloat32Array(0, 0.692737)
+colors = PackedColorArray(1, 1, 1, 1, 0.171875, 0.171875, 0.171875, 1)
+
+[node name="DashParticles" type="Node2D"]
+script = ExtResource("1_nqmue")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 30
+one_shot = true
+preprocess = 0.2
+explosiveness = 1.0
+randomness = 0.25
+emission_shape = 1
+emission_sphere_radius = 3.14
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+scale_amount_curve = SubResource("Curve_m34si")
+color_ramp = SubResource("Gradient_4ry81")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cojkx00qwthdn"]
+
+[ext_resource type="Script" uid="uid://b7ircqa2qd7x2" path="res://scripts/essence/essence_ui.gd" id="1_j3edw"]
+
+[node name="EssenceUI" type="Node2D"]
+script = ExtResource("1_j3edw")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 248.0
+offset_bottom = 248.0
+scale = Vector2(0.063, 0.063)

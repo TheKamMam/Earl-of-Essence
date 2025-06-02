@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv0febjpquqt"]
+
+[ext_resource type="Script" uid="uid://pi6bgaxcb2t0" path="res://scripts/components/hitbox_component.gd" id="1_okvui"]
+
+[node name="HitboxComponent" type="Area2D"]
+script = ExtResource("1_okvui")
+
+[node name="DisableTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

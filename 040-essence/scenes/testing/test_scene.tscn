@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=3 uid="uid://drfo166y7mpcq"]
+
+[ext_resource type="PackedScene" uid="uid://dpbcprk36qxtr" path="res://scenes/player/player.tscn" id="1_bmh7g"]
+[ext_resource type="PackedScene" uid="uid://ekng27jtktln" path="res://scenes/enemies/rammy.tscn" id="2_rj4rt"]
+[ext_resource type="Texture2D" uid="uid://dddf1qiadbifv" path="res://assets/art/essences/rammy_essence.png" id="3_f548g"]
+[ext_resource type="PackedScene" uid="uid://dhuysd0k1visc" path="res://scenes/enemies/dashy.tscn" id="3_si0cu"]
+[ext_resource type="Script" uid="uid://cictqv5y23sg1" path="res://assets/essences/rammy_essence.gd" id="4_8bj6v"]
+[ext_resource type="PackedScene" uid="uid://si7fhgebfdq4" path="res://scenes/enemies/spitty.tscn" id="5_wrvty"]
+[ext_resource type="Texture2D" uid="uid://l33rx71okcaa" path="res://assets/art/essences/spitty_essence.png" id="6_ekr1f"]
+[ext_resource type="Script" uid="uid://f3lxvfmvijie" path="res://assets/essences/spitty_essence.gd" id="7_icabf"]
+[ext_resource type="Texture2D" uid="uid://dr8655gwwswgi" path="res://assets/art/essences/dashy_essence.png" id="9_cescg"]
+[ext_resource type="Script" uid="uid://bnly8d4gj72r7" path="res://assets/essences/dashy_essence.gd" id="10_tlwpc"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rj4rt"]
+vertices = PackedVector2Array(176, 96, 320, 180, 0, 180, 144, 96, 320, 0, 176, 64, 0, 0, 144, 64)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(3, 2, 6, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-10, -10, 330, -10, 330, 190, -10, 190)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj4rt"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_si0cu"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f548g"]
+size = Vector2(340, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmh7g"]
+size = Vector2(340, 10)
+
+[sub_resource type="Resource" id="Resource_3iwq5"]
+resource_local_to_scene = true
+script = ExtResource("4_8bj6v")
+invincibility_time = 3.0
+icon = ExtResource("3_f548g")
+max_health = 100
+decrement = 10
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_cescg"]
+resource_local_to_scene = true
+script = ExtResource("7_icabf")
+icon = ExtResource("6_ekr1f")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_ejbca"]
+resource_local_to_scene = true
+script = ExtResource("10_tlwpc")
+dash_speed = 600
+dash_time = 0.125
+dash_cooldown = 0.5
+icon = ExtResource("9_cescg")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[node name="TestScene" type="Node2D"]
+y_sort_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_rj4rt")
+metadata/_edit_lock_ = true
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D"]
+position = Vector2(164, 80)
+vertices = PackedVector2Array(-20, -16, 12, -16, 12, 16, -20, 16)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="Player" parent="." instance=ExtResource("1_bmh7g")]
+position = Vector2(110, 125)
+
+[node name="ScreenBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(-5, 90)
+shape = SubResource("RectangleShape2D_rj4rt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(325, 90)
+shape = SubResource("RectangleShape2D_si0cu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, -5)
+shape = SubResource("RectangleShape2D_f548g")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, 185)
+shape = SubResource("RectangleShape2D_bmh7g")
+
+[node name="Rammy" parent="." instance=ExtResource("2_rj4rt")]
+position = Vector2(224, 58)
+essence = SubResource("Resource_3iwq5")
+
+[node name="Spitty" parent="." instance=ExtResource("5_wrvty")]
+position = Vector2(54, 52)
+essence = SubResource("Resource_cescg")
+
+[node name="Dashy" parent="." instance=ExtResource("3_si0cu")]
+position = Vector2(238, 158)
+essence = SubResource("Resource_ejbca")

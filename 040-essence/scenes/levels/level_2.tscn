@@ -1,0 +1,134 @@
+[gd_scene load_steps=21 format=3 uid="uid://bc7cx3671ips0"]
+
+[ext_resource type="Script" uid="uid://5mf8xpohsvgb" path="res://scripts/objects/level.gd" id="1_8qukl"]
+[ext_resource type="PackedScene" uid="uid://dpbcprk36qxtr" path="res://scenes/player/player.tscn" id="2_3p04p"]
+[ext_resource type="PackedScene" uid="uid://dqkmv0qmomhrp" path="res://scenes/objects/enemy_spawner.tscn" id="3_qsp8v"]
+[ext_resource type="PackedScene" uid="uid://si7fhgebfdq4" path="res://scenes/enemies/spitty.tscn" id="4_ibugp"]
+[ext_resource type="PackedScene" uid="uid://bve3w46wuf2q4" path="res://scenes/objects/next_level_door.tscn" id="5_brxtv"]
+[ext_resource type="PackedScene" uid="uid://dadb1d17g167b" path="res://scenes/levels/level_3.tscn" id="6_3p04p"]
+[ext_resource type="PackedScene" uid="uid://cxgwkutsc6t7y" path="res://scenes/essence/essence_collectable.tscn" id="6_tv7cl"]
+[ext_resource type="Texture2D" uid="uid://l33rx71okcaa" path="res://assets/art/essences/spitty_essence.png" id="7_8qukl"]
+[ext_resource type="Script" uid="uid://f3lxvfmvijie" path="res://assets/essences/spitty_essence.gd" id="8_3p04p"]
+[ext_resource type="Script" uid="uid://dn8b27p7l4qd4" path="res://scripts/objects/tutorial_text.gd" id="10_nt80m"]
+[ext_resource type="FontFile" uid="uid://dsgd2l7v3xakg" path="res://assets/fonts/Beautiful Valentine.otf" id="11_brxtv"]
+
+[sub_resource type="Gradient" id="Gradient_excbq"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.57377, 1)
+colors = PackedColorArray(0.541176, 0.345098, 0.396078, 1, 0.337255, 0.329412, 0.431373, 1, 0.270588, 0.168627, 0.247059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nt80m"]
+gradient = SubResource("Gradient_excbq")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk5k4"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc4kc"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8va5"]
+size = Vector2(340, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dga24"]
+size = Vector2(340, 10)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6761a"]
+vertices = PackedVector2Array(404.117, -59.3203, 407.859, 230.039, -76.2891, 231.961, -85.6719, -75.6484)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-96, -86, 414, -69, 418, 240, -86, 242)])
+
+[sub_resource type="Resource" id="Resource_brxtv"]
+resource_local_to_scene = true
+script = ExtResource("8_3p04p")
+icon = ExtResource("7_8qukl")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="LabelSettings" id="LabelSettings_r88tb"]
+font = ExtResource("11_brxtv")
+font_size = 6
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_8qukl")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.658824)
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -9.0
+offset_right = 331.0
+offset_bottom = 191.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_nt80m")
+
+[node name="Player" parent="." instance=ExtResource("2_3p04p")]
+position = Vector2(92, 56)
+
+[node name="ScreenBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(-5, 90)
+shape = SubResource("RectangleShape2D_sk5k4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(325, 90)
+shape = SubResource("RectangleShape2D_oc4kc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, -5)
+shape = SubResource("RectangleShape2D_s8va5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, 185)
+shape = SubResource("RectangleShape2D_dga24")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_qsp8v")]
+enemy_to_spawn = ExtResource("4_ibugp")
+spawn_time = 2
+total_enemies_to_spawn = 2
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_qsp8v")]
+enemy_to_spawn = ExtResource("4_ibugp")
+spawn_time = 4
+total_enemies_to_spawn = 4
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("5_brxtv")]
+visible = false
+position = Vector2(156, 91)
+next_level = ExtResource("6_3p04p")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_6761a")
+
+[node name="EssenceCollectable" parent="." instance=ExtResource("6_tv7cl")]
+position = Vector2(156, 94)
+essence = SubResource("Resource_brxtv")
+
+[node name="TutorialText" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_nt80m")
+
+[node name="Label3" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 102.0
+offset_right = 202.0
+offset_bottom = 109.0
+text = "Allows projectiles to be sshot at enemies"
+label_settings = SubResource("LabelSettings_r88tb")
+horizontal_alignment = 1

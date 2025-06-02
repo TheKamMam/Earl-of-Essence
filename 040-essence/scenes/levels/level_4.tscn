@@ -1,0 +1,149 @@
+[gd_scene load_steps=26 format=3 uid="uid://cvljvkb6w42xi"]
+
+[ext_resource type="Script" uid="uid://5mf8xpohsvgb" path="res://scripts/objects/level.gd" id="1_ts8eg"]
+[ext_resource type="PackedScene" uid="uid://dpbcprk36qxtr" path="res://scenes/player/player.tscn" id="2_um320"]
+[ext_resource type="PackedScene" uid="uid://dqkmv0qmomhrp" path="res://scenes/objects/enemy_spawner.tscn" id="3_glw47"]
+[ext_resource type="PackedScene" uid="uid://ekng27jtktln" path="res://scenes/enemies/rammy.tscn" id="4_4wsov"]
+[ext_resource type="PackedScene" uid="uid://si7fhgebfdq4" path="res://scenes/enemies/spitty.tscn" id="4_fcb7b"]
+[ext_resource type="PackedScene" uid="uid://dhuysd0k1visc" path="res://scenes/enemies/dashy.tscn" id="5_ov8fk"]
+[ext_resource type="PackedScene" uid="uid://bve3w46wuf2q4" path="res://scenes/objects/next_level_door.tscn" id="5_qvnao"]
+[ext_resource type="PackedScene" uid="uid://cxgwkutsc6t7y" path="res://scenes/essence/essence_collectable.tscn" id="6_hsvsk"]
+[ext_resource type="Texture2D" uid="uid://dddf1qiadbifv" path="res://assets/art/essences/rammy_essence.png" id="7_fcb7b"]
+[ext_resource type="Script" uid="uid://cictqv5y23sg1" path="res://assets/essences/rammy_essence.gd" id="8_ov8fk"]
+[ext_resource type="PackedScene" uid="uid://gimp0vlkgw6h" path="res://scenes/levels/win_screen.tscn" id="8_pmra4"]
+[ext_resource type="Texture2D" uid="uid://dr8655gwwswgi" path="res://assets/art/essences/dashy_essence.png" id="9_pmra4"]
+[ext_resource type="Script" uid="uid://bnly8d4gj72r7" path="res://assets/essences/dashy_essence.gd" id="10_1bx01"]
+[ext_resource type="Texture2D" uid="uid://l33rx71okcaa" path="res://assets/art/essences/spitty_essence.png" id="11_vq5n0"]
+[ext_resource type="Script" uid="uid://f3lxvfmvijie" path="res://assets/essences/spitty_essence.gd" id="12_xt2o7"]
+
+[sub_resource type="Gradient" id="Gradient_fcb7b"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.57377, 1)
+colors = PackedColorArray(0.541176, 0.345098, 0.396078, 1, 0.337255, 0.329412, 0.431373, 1, 0.270588, 0.168627, 0.247059, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ov8fk"]
+gradient = SubResource("Gradient_fcb7b")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sk5k4"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc4kc"]
+size = Vector2(10, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8va5"]
+size = Vector2(340, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dga24"]
+size = Vector2(340, 10)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6761a"]
+vertices = PackedVector2Array(404.117, -59.3203, 407.859, 230.039, -76.2891, 231.961, -85.6719, -75.6484)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-96, -86, 414, -69, 418, 240, -86, 242)])
+
+[sub_resource type="Resource" id="Resource_pmra4"]
+resource_local_to_scene = true
+script = ExtResource("10_1bx01")
+dash_speed = 600
+dash_time = 0.125
+dash_cooldown = 0.5
+icon = ExtResource("9_pmra4")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_1bx01"]
+resource_local_to_scene = true
+script = ExtResource("12_xt2o7")
+icon = ExtResource("11_vq5n0")
+max_health = 100
+decrement = 10
+type = 0
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[sub_resource type="Resource" id="Resource_vq5n0"]
+resource_local_to_scene = true
+script = ExtResource("8_ov8fk")
+invincibility_time = 3.0
+icon = ExtResource("7_fcb7b")
+max_health = 100
+decrement = 10
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
+
+[node name="Level_4" type="Node2D"]
+script = ExtResource("1_ts8eg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.658824)
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 330.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ov8fk")
+
+[node name="Player" parent="." instance=ExtResource("2_um320")]
+position = Vector2(148, 153)
+
+[node name="ScreenBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(-5, 90)
+shape = SubResource("RectangleShape2D_sk5k4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(325, 90)
+shape = SubResource("RectangleShape2D_oc4kc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, -5)
+shape = SubResource("RectangleShape2D_s8va5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="ScreenBorder"]
+position = Vector2(160, 185)
+shape = SubResource("RectangleShape2D_dga24")
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_glw47")]
+enemy_to_spawn = ExtResource("4_fcb7b")
+spawn_time = 4
+total_enemies_to_spawn = 2
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("3_glw47")]
+enemy_to_spawn = ExtResource("5_ov8fk")
+spawn_time = 3
+total_enemies_to_spawn = 3
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("3_glw47")]
+enemy_to_spawn = ExtResource("4_4wsov")
+spawn_time = 5
+total_enemies_to_spawn = 2
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("5_qvnao")]
+visible = false
+position = Vector2(156, 91)
+next_level = ExtResource("8_pmra4")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_6761a")
+
+[node name="EssenceCollectable1" parent="." instance=ExtResource("6_hsvsk")]
+position = Vector2(103, 95)
+essence = SubResource("Resource_pmra4")
+
+[node name="EssenceCollectable2" parent="." instance=ExtResource("6_hsvsk")]
+position = Vector2(156, 94)
+essence = SubResource("Resource_1bx01")
+
+[node name="EssenceCollectable3" parent="." instance=ExtResource("6_hsvsk")]
+position = Vector2(209, 94)
+essence = SubResource("Resource_vq5n0")

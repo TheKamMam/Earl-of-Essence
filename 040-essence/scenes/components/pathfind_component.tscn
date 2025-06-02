@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxs0ik3mokcdg"]
+
+[ext_resource type="Script" uid="uid://cay6wiqkvw4cx" path="res://scripts/components/pathfind_component.gd" id="1_y07gc"]
+
+[node name="PathfindComponent" type="Node2D"]
+script = ExtResource("1_y07gc")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+unique_name_in_owner = true
+avoidance_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="IntervalTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

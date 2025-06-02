@@ -1,0 +1,253 @@
+[gd_scene load_steps=21 format=3 uid="uid://dhuysd0k1visc"]
+
+[ext_resource type="PackedScene" uid="uid://c23x1u2pibfqo" path="res://scenes/components/velocity_component.tscn" id="1_67lfx"]
+[ext_resource type="Script" uid="uid://c5in8n6winxat" path="res://scripts/enemies/dashy.gd" id="1_md8aw"]
+[ext_resource type="Resource" uid="uid://btnu4ickg0rnf" path="res://assets/essences/dashy_essence.tres" id="2_ja15i"]
+[ext_resource type="PackedScene" uid="uid://dxs0ik3mokcdg" path="res://scenes/components/pathfind_component.tscn" id="2_md8aw"]
+[ext_resource type="PackedScene" uid="uid://cxswit11xvp2l" path="res://scenes/components/health_component.tscn" id="3_4n48j"]
+[ext_resource type="Texture2D" uid="uid://34pyeuqdddcw" path="res://assets/art/enemies/dashy.png" id="3_iiw1f"]
+[ext_resource type="Shader" uid="uid://d3ui741dnaup8" path="res://assets/shaders/flash_color.gdshader" id="3_lbyea"]
+[ext_resource type="PackedScene" uid="uid://cv0febjpquqt" path="res://scenes/components/hitbox_component.tscn" id="4_gyjjk"]
+[ext_resource type="PackedScene" uid="uid://c7jshr4urjdpu" path="res://scenes/components/hurtbox_component.tscn" id="5_6cxn5"]
+[ext_resource type="Texture2D" uid="uid://daxuo8rpv4tmh" path="res://assets/art/enemies/dashy_charge.png" id="9_kb570"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjhr7"]
+resource_local_to_scene = true
+shader = ExtResource("3_lbyea")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_mult = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjhr7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kb570"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbyea"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_bjhr7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_iiw1f")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.125, 0.125)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lbyea"]
+resource_name = "dash_windup"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_iiw1f"), ExtResource("9_kb570")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.125, 0.125), Vector2(0.125, 0.125), Vector2(0.175, 0.175), Vector2(0.125, 0.125)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxComponent/CollisionShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x018a"]
+_data = {
+&"RESET": SubResource("Animation_bjhr7"),
+&"dash_windup": SubResource("Animation_lbyea")
+}
+
+[sub_resource type="Animation" id="Animation_myrg7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_mult")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.125, 0.125)]
+}
+
+[sub_resource type="Animation" id="Animation_fcs02"]
+resource_name = "flash"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:material:shader_parameter/flash_mult")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.125, 0.125), Vector2(0.15, 0.15), Vector2(0.125, 0.125)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvlxm"]
+_data = {
+&"RESET": SubResource("Animation_myrg7"),
+&"flash": SubResource("Animation_fcs02")
+}
+
+[node name="Dashy" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_md8aw")
+essence = ExtResource("2_ja15i")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bjhr7")
+position = Vector2(0, -10)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_iiw1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_bjhr7")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_67lfx")]
+unique_name_in_owner = true
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("2_md8aw")]
+unique_name_in_owner = true
+velocity_component = NodePath("../VelocityComponent")
+interval_time = 0.5
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_4n48j")]
+unique_name_in_owner = true
+max_health = 30.0
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("4_gyjjk")]
+collision_layer = 2
+collision_mask = 2
+damage_value = 10.0
+collision_shape = NodePath("CollisionShape")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_kb570")
+disabled = true
+debug_color = Color(0.678431, 0.00392157, 0.00392157, 0.133333)
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component", "collision_shape") instance=ExtResource("5_6cxn5")]
+collision_layer = 4
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+collision_shape = NodePath("CollisionShape")
+disable_time = 0.5
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(2, -8)
+shape = SubResource("CircleShape2D_lbyea")
+debug_color = Color(0.00392157, 0.701961, 0, 0.180392)
+
+[node name="DashTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_x018a")
+}
+
+[node name="ShaderPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_kvlxm")
+}
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

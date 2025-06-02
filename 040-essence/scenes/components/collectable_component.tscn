@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://diric85xn7pgu"]
+
+[ext_resource type="Script" uid="uid://vsnoomcpy6mx" path="res://scripts/components/collectable_component.gd" id="1_14mdg"]
+
+[node name="CollectableComponent" type="Node2D"]
+script = ExtResource("1_14mdg")
+auto_collect = false

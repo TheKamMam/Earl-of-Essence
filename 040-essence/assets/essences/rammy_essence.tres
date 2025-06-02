@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dydtdlfqmyuhn"]
+
+[ext_resource type="Texture2D" uid="uid://dddf1qiadbifv" path="res://assets/art/essences/rammy_essence.png" id="1_72u6g"]
+[ext_resource type="Script" uid="uid://cictqv5y23sg1" path="res://assets/essences/rammy_essence.gd" id="1_wk83u"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_wk83u")
+invincibility_time = 3.0
+icon = ExtResource("1_72u6g")
+max_health = 100
+decrement = null
+type = 1
+metadata/_custom_type_script = "uid://xe3osemifhjw"
